@@ -26,8 +26,8 @@ fclean: clean
 
 re: fclean all
 
-TEST = ft_strcpy_test
-TEST_SRC = src/ft_strcpy.c
+TEST = ft_strchr_test
+TEST_SRC = src/ft_strchr.c
 
 $(TEST): $(TEST_SRC) $(NAME)
 	@echo "Compiling test program $@"
