@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 13:17:13 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/02 13:24:52 by aosman           ###   ########.fr       */
+/*   Created: 2025/06/02 13:39:48 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/02 15:28:22 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
 int	main(void)
 {
-	char	str[50];
+	char	*str;
 
-	ft_strcpy(str, "Welcome to 42Wolfsburg");
-	puts(str);
-	ft_memset(str, '#', 7);
-	puts(str);
-	return (0);
+	str = "Hello, 42Wolfsburg";
+	printf("String : %s\n", str);
+	printf("Length : %li\n", ft_strlen(str));
 }
-
-void	*ft_memset(void *str, int c, size_t n)
+*/
+size_t	ft_strlen(const char *str)
 {
-	size_t			i;
-	unsigned char	*res;
+	size_t	len;
 
-	res = (unsigned char *)str;
-	i = 0;
-	while (i < n)
-	{
-		res[i] = (unsigned char)c;
-		i++;
-	}
-	return (str);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }

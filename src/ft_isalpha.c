@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 13:17:13 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/02 13:24:52 by aosman           ###   ########.fr       */
+/*   Created: 2025/06/02 13:03:11 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/02 13:16:05 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,12 @@
 
 int	main(void)
 {
-	char	str[50];
-
-	ft_strcpy(str, "Welcome to 42Wolfsburg");
-	puts(str);
-	ft_memset(str, '#', 7);
-	puts(str);
-	return (0);
+	printf("response : %d", ft_isalpha('0'));
 }
 
-void	*ft_memset(void *str, int c, size_t n)
+int	ft_isalpha(int c)
 {
-	size_t			i;
-	unsigned char	*res;
-
-	res = (unsigned char *)str;
-	i = 0;
-	while (i < n)
-	{
-		res[i] = (unsigned char)c;
-		i++;
-	}
-	return (str);
+	if ((c >= 65 && c <= 97) || (c >= 97 && c <= 121))
+		return (1);
+	return (0);
 }
