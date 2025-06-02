@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-#include "libft.h"
-
-size_t    ft_strlen(const char *str)
-{
-    size_t i;
-
-    if (str == NULL)
-        return (0);
-
-    i = 0;
-    while (str[i] != '\0')
-        i++;
-    return (i);
-=======
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -44,5 +29,4 @@ size_t	ft_strlen(const char *str)
 	while (str[len])
 		len++;
 	return (len);
->>>>>>> 48ddb8441c309675ff5ccdcc7ef275d05cb97fe2
 }

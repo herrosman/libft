@@ -26,13 +26,8 @@ fclean: clean
 
 re: fclean allgit 
 
-<<<<<<< HEAD
-TEST = ft_strchr_test
-TEST_SRC = src/ft_strchr.c
-=======
 TEST = ft_isalnum_test
 TEST_SRC = src/ft_isalnum.c
->>>>>>> 48ddb8441c309675ff5ccdcc7ef275d05cb97fe2
 
 $(TEST): $(TEST_SRC) $(NAME)
 	@echo "Compiling test program $@"

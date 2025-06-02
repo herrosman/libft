@@ -12,13 +12,9 @@
 
 #include "libft.h"
 
-<<<<<<< HEAD
 
 
 int main(void)
-=======
-int	main(void)
->>>>>>> 48ddb8441c309675ff5ccdcc7ef275d05cb97fe2
 {
 	char	str[50];
 
