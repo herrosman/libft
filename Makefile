@@ -24,10 +24,10 @@ fclean: clean
 	@echo "Removing library"
 	rm -f $(NAME)
 
-re: fclean all
+re: fclean allgit 
 
-TEST = ft_strlcat_test
-TEST_SRC = src/ft_strlcat.c
+TEST = ft_isalnum_test
+TEST_SRC = src/ft_isalnum.c
 
 $(TEST): $(TEST_SRC) $(NAME)
 	@echo "Compiling test program $@"
