@@ -1,3 +1,9 @@
 {
+<<<<<<< HEAD
     "makefile.configureOnOpen": true
+=======
+    "files.associations": {
+        "string.h": "c"
+    }
+>>>>>>> 48ddb8441c309675ff5ccdcc7ef275d05cb97fe2
 }

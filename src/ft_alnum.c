@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_alnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 13:17:13 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/02 13:24:52 by aosman           ###   ########.fr       */
+/*   Created: 2025/06/02 17:06:21 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/02 17:18:44 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-<<<<<<< HEAD
-
-
 int main(void)
-=======
-int	main(void)
->>>>>>> 48ddb8441c309675ff5ccdcc7ef275d05cb97fe2
 {
-	char	str[50];
-
-	ft_strcpy(str, "Welcome to 42Wolfsburg");
-	puts(str);
-	ft_memset(str, '#', 7);
-	puts(str);
-	return (0);
+    printf("%d", 'C');
+    return 0;
 }
 
-void	*ft_memset(void *str, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*res;
 
-	res = (unsigned char *)str;
-	i = 0;
-	while (i < n)
-	{
-		res[i] = (unsigned char)c;
-		i++;
-	}
-	return (str);
+
+int	ft_isalnum(int c)
+{
+   if (ft_isalpha(c) || ft_isdigit(c))
+        return (1);
+    return (0);
 }
