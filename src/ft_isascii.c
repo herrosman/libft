@@ -1,11 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 10:21:58 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/03 12:27:10 by aosman           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int main(void)
+int	ft_isascii(int c)
 {
-    printf("%d\n", ft_isascii(65));  // Should print 1 (A)
-    printf("%d\n", ft_isascii(128)); // Should print 0 (not ASCII)
-}
-int ft_isascii(int c)
-{
-    return (c >= 0 && c <= 127);
+	return (c >= 0 && c <= 127);
 }

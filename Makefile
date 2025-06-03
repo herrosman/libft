@@ -26,15 +26,16 @@ fclean: clean
 
 re: fclean allgit 
 
-TEST = ft_isalnum_test
-TEST_SRC = src/ft_isalnum.c
+MAIN = main
+MAIN_SRC = src/main.c
 
-$(TEST): $(TEST_SRC) $(NAME)
-	@echo "Compiling test program $@"
-	$(CC) $(CFLAGS) $(TEST_SRC) -L. -lft -o $(TEST)
+$(MAIN): $(MAIN_SRC) $(NAME)
+	@echo "Compiling main test program $@"
+	$(CC) $(CFLAGS) $(MAIN_SRC) -L. -lft -o $(MAIN)
 
-run: $(TEST)
-	@echo "Running test program"
-	./$(TEST)
+run: $(MAIN)
+	@echo "Running main test program"
+	./$(MAIN)
+
 
 .PHONY: all clean fclean re

@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_alnum.c                                         :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 17:06:21 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/02 17:18:44 by aosman           ###   ########.fr       */
+/*   Created: 2025/06/03 10:43:15 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/03 16:09:38 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int main(void)
+int	ft_toupper(int c)
 {
-    printf("%d", 'C');
-    return 0;
-}
-
-
-
-int	ft_isalnum(int c)
-{
-   if (ft_isalpha(c) || ft_isdigit(c))
-        return (1);
-    return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }

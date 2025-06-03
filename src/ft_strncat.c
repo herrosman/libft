@@ -1,36 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 15:36:39 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/03 15:59:26 by aosman           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int main()
+char	*ft_strncat(char *dest, const char *src, size_t n)
 {
-  
-   // Take any two strings
-   char src[50] = "efghijkl";
-   char dest[50]= "abcd";
- 
-   // Appends 5 character from src to dest
-   strncat(dest, src, 5);
-    
-   // Prints the string
-   printf("Source string : %s\n", src);
-   printf("Destination string : %s\n", dest);
-   
-   return 0;
-}
+	size_t	i;
+	size_t	d;
 
-char *ft_strncat(char *dest, const char *src, size_t n)
-{
-    char    *ptr;
-    size_t    i;
-
-    ptr = dest;
-    while (*ptr)
-        ptr++;
-
-    while (*src && i < n)
-    {
-        *ptr++ = *src++;
-        i++;
-    }
-    *ptr = '\0';
-    return dest;
+	i = 0;
+	d = 0;
+	while (dest[d])
+		d++;
+	while (src[i] && i < n)
+		dest[d++] = src[i++];
+	dest[d] = '\0';
+	return (dest);
 }
