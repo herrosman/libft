@@ -1,5 +1,65 @@
 #include "libft.h"
 
+void run_test(const char *haystack, const char *needle)
+{
+    char *std_result = strstr(haystack, needle);
+    char *ft_result = ft_strstr(haystack, needle);
+
+    printf("Haystack: \"%s\"\n", haystack);
+    printf("Needle  : \"%s\"\n", needle);
+    printf("strstr  : %s\n", std_result ? std_result : "(null)");
+    printf("ft_strstr: %s\n", ft_result ? ft_result : "(null)");
+    printf("Match?   : %s\n\n", (std_result == ft_result || (std_result && ft_result && strcmp(std_result, ft_result) == 0)) ? "YES" : "NO");
+}
+
+int main(void)
+{
+    // Basic match
+    run_test("abcdef", "cd");
+
+    // Needle at start
+    run_test("abcdef", "ab");
+
+    // Needle at end
+    run_test("abcdef", "ef");
+
+    // Needle not found
+    run_test("abcdef", "gh");
+
+    // Empty needle
+    run_test("abcdef", "");
+
+    // Empty haystack
+    run_test("", "a");
+
+    // Both empty
+    run_test("", "");
+
+    // Needle longer than haystack
+    run_test("abc", "abcd");
+
+    // Repeated characters
+    run_test("aaaaaa", "aaa");
+
+    // Needle is entire haystack
+    run_test("abc", "abc");
+
+    // Special characters
+    run_test("a!@#b$%^c", "!@#");
+
+    // Overlapping matches
+    run_test("ababababa", "aba");
+
+    return 0;
+}
+
+/* ft_strncpy - Copy a string with size limit
+ * @dest: Destination string
+ * @src: Source string
+ * @n: Maximum number of characters to copy from src
+ *
+ * Returns a pointer to the destination string dest.
+ 
 void print_strncpy_result(const char *test, char *mybuf, char *stdbuf, size_t n) {
     printf("%s (n=%zu)\n", test, n);
     printf("ft_strncpy:   \"%s\"\n", mybuf);
@@ -69,7 +129,7 @@ int main(void) {
 
     return 0;
 }
-
+*/
 /* ft_strncat - Concatenate two strings with size limit
  * @dest: Destination string
  * @src: Source string
