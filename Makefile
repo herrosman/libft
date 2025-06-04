@@ -1,9 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -Iinclude
-SRC_DIR = src
-INCLUDE_DIR = include
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
+CFLAGS = -Wall -Wextra -Werror
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
 NAME = libft.a
 
 all: $(NAME)
@@ -11,7 +9,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $@ $^
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -23,9 +21,10 @@ fclean: clean
 re: fclean all
 
 MAIN = main
-MAIN_SRC = src/main.c
+MAIN_SRC = main.c
 
 $(MAIN): $(MAIN_SRC) $(NAME)
+	@echo "Compiling main test program $@"
 	$(CC) $(CFLAGS) $(MAIN_SRC) -L. -lft -o $(MAIN)
 
 run: $(MAIN)

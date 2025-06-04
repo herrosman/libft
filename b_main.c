@@ -1,58 +1,201 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   b_main.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/04 12:37:57 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/04 16:23:41 by aosman           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-
-void run_test(const char *haystack, const char *needle)
-{
-    char *std_result = strstr(haystack, needle);
-    char *ft_result = ft_strstr(haystack, needle);
-
-    printf("Haystack: \"%s\"\n", haystack);
-    printf("Needle  : \"%s\"\n", needle);
-    printf("strstr  : %s\n", std_result ? std_result : "(null)");
-    printf("ft_strstr: %s\n", ft_result ? ft_result : "(null)");
-    printf("Match?   : %s\n\n", (std_result == ft_result || (std_result && ft_result && strcmp(std_result, ft_result) == 0)) ? "YES" : "NO");
-}
 
 int main(void)
 {
-    // Basic match
-    run_test("abcdef", "cd");
+   int val, std;
+   char *str; 
+   str = "--150c9";
+   val = ft_atoi(str); 
+   std = atoi(str);
+   printf("ft response : %d, atoi : %d\n", val, std);
+}
+/*
+int main () 
+{
+   char str1[15];
+   char str2[15];
+   int ret, exp;
 
-    // Needle at start
-    run_test("abcdef", "ab");
+   ft_memcpy(str1, "ABZDEF", 6);
+   ft_memcpy(str2, "ABZDEZ", 6);
 
-    // Needle at end
-    run_test("abcdef", "ef");
+   	ret = ft_memcmp(str1, str2, 6);
+	exp =  memcmp(str1, str2, 6);
+   
+	
+	printf("ft buffer : %i, stbuffer : %i\n", ret, exp);
+	
+	if(ret > 0) {
+      printf("str2 is less than str1");
+	} 
+   else if(ret < 0) {
+      printf("str1 is less than str2");
+   } 
+   else {
+      printf("str1 is equal to str2");
+   }
+   return(0);
+}
+   
+int main(){
+	const char str[] = "Tutorialspoint";
+	const char str1[] = "Tutorialspoint";
+   const char ch = 't';
+   char *ret, *exp;
+   ret = ft_memchr(str, ch, strlen(str));
+   exp = ft_memchr(str1, ch, strlen(str1));
+   printf("ft_memchr after |%c| is - |%s|\n", ch, ret);
+   printf("memchr after |%c| is - |%s|\n", ch, exp);
+   return(0);
+}
 
-    // Needle not found
-    run_test("abcdef", "gh");
+int main(){
+	char str[100] = "Learningisfun";
+    char *first, *second;
+    first = str;
+    second = str;
+    printf("Original string :%s\n ", str);
+    
+    // when overlap happens then it just ignore it
+    memcpy(first + 8, first, 10);
+    printf("memcpy overlap : %s\n ", str);
 
-    // Empty needle
-    run_test("abcdef", "");
-
-    // Empty haystack
-    run_test("", "a");
-
-    // Both empty
-    run_test("", "");
-
-    // Needle longer than haystack
-    run_test("abc", "abcd");
-
-    // Repeated characters
-    run_test("aaaaaa", "aaa");
-
-    // Needle is entire haystack
-    run_test("abc", "abc");
-
-    // Special characters
-    run_test("a!@#b$%^c", "!@#");
-
-    // Overlapping matches
-    run_test("ababababa", "aba");
+    // when overlap it start from first position
+    memmove(second + 8, first, 10);
+    printf("memmove overlap : %s\n ", str);
 
     return 0;
 }
+ ft_memcopy test
+void print_buffer(const char *label, unsigned char *buf, size_t n) {
+    printf("%s: ", label);
+    for (size_t i = 0; i < n; i++)
+        printf("%02x ", buf[i]);
+    printf("\n");
+}
 
+int main(void) {
+    unsigned char src[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    unsigned char dst1[10];
+    unsigned char dst2[10];
+
+    // Full copy
+    ft_memcpy(dst1, src, 10);
+    memcpy(dst2, src, 10);
+    print_buffer("ft_memcpy", dst1, 10);
+    print_buffer("memcpy", dst2, 10);
+    if (memcmp(dst1, dst2, 10) == 0)
+        printf("PASS: Full copy\n");
+    else
+        printf("FAIL: Full copy\n");
+
+    // Partial copy
+    for (int i = 0; i < 10; i++) dst1[i] = dst2[i] = 0xFF;
+    ft_memcpy(dst1, src, 5);
+    memcpy(dst2, src, 5);
+    print_buffer("ft_memcpy (partial)", dst1, 10);
+    print_buffer("memcpy (partial)", dst2, 10);
+    if (memcmp(dst1, dst2, 10) == 0)
+        printf("PASS: Partial copy\n");
+    else
+        printf("FAIL: Partial copy\n");
+
+    // Zero length
+    for (int i = 0; i < 10; i++) dst1[i] = dst2[i] = 0xAA;
+    ft_memcpy(dst1, src, 0);
+    memcpy(dst2, src, 0);
+    if (memcmp(dst1, dst2, 10) == 0)
+        printf("PASS: Zero length\n");
+    else
+        printf("FAIL: Zero length\n");
+
+    // Self copy
+    for (int i = 0; i < 10; i++) dst1[i] = i;
+    ft_memcpy(dst1, dst1, 10);
+    print_buffer("ft_memcpy (self)", dst1, 10);
+    printf("PASS: Self copy (should be unchanged)\n");
+
+    return 0;
+}
+*/
+/* * ft_bzero - Set a block of memory to zero
+ * @s: Pointer to the memory block
+ * @n: Number of bytes to set to zero
+ *
+ * This function sets the first n bytes of the memory area pointed to by s to zero.
+
+void print_buffer(const char *label, unsigned char *buf, size_t n) {
+    printf("%s: ", label);
+    for (size_t i = 0; i < n; i++)
+        printf("%02x ", buf[i]);
+    printf("\n");
+}
+
+int main(void) {
+    unsigned char buf1[10];
+    unsigned char buf2[10];
+
+    // Fill buffers with non-zero values
+    for (int i = 0; i < 10; i++) {
+        buf1[i] = (unsigned char)(i + 1);
+        buf2[i] = (unsigned char)(i + 1);
+    }
+
+    // Use ft_bzero and standard bzero
+    ft_bzero(buf1, 10);
+    memset(buf2, 0, 10);
+
+    print_buffer("ft_bzero", buf1, 10);
+    print_buffer("memset", buf2, 10);
+
+    // Check if both buffers are zeroed
+    if (memcmp(buf1, buf2, 10) == 0)
+        printf("PASS: Buffers are zeroed correctly\n");
+    else
+        printf("FAIL: Buffers differ\n");
+
+    // Partial zeroing
+    for (int i = 0; i < 10; i++)
+        buf1[i] = buf2[i] = (unsigned char)(i + 1);
+
+    ft_bzero(buf1, 5);
+    memset(buf2, 0, 5);
+
+    print_buffer("ft_bzero (partial)", buf1, 10);
+    print_buffer("memset (partial)", buf2, 10);
+
+    if (memcmp(buf1, buf2, 10) == 0)
+        printf("PASS: Partial zeroing works\n");
+    else
+        printf("FAIL: Partial zeroing failed\n");
+
+    // Zero length
+    for (int i = 0; i < 10; i++)
+        buf1[i] = buf2[i] = (unsigned char)(i + 1);
+
+    ft_bzero(buf1, 0);
+    memset(buf2, 0, 0);
+
+    if (memcmp(buf1, buf2, 10) == 0)
+        printf("PASS: Zero length does nothing\n");
+    else
+        printf("FAIL: Zero length failed\n");
+
+    return 0;
+}
+*/
 /* ft_strncpy - Copy a string with size limit
  * @dest: Destination string
  * @src: Source string
@@ -64,7 +207,7 @@ void print_strncpy_result(const char *test, char *mybuf, char *stdbuf, size_t n)
     printf("%s (n=%zu)\n", test, n);
     printf("ft_strncpy:   \"%s\"\n", mybuf);
     printf("std strncpy:  \"%s\"\n", stdbuf);
-    if (memcmp(mybuf, stdbuf, n) == 0)
+    if (ft_strncmp(mybuf, stdbuf, n) == 0)
         printf("PASS\n\n");
     else
         printf("FAIL\n\n");
@@ -128,8 +271,7 @@ int main(void) {
     print_strncpy_result("Test 8: n = buffer size", mybuf8, stdbuf8, sizeof(mybuf8));
 
     return 0;
-}
-*/
+}*/
 /* ft_strncat - Concatenate two strings with size limit
  * @dest: Destination string
  * @src: Source string
