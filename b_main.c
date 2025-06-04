@@ -6,22 +6,24 @@
 /*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:57 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/04 16:23:41 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/04 18:23:03 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "libft.h"
 
 int main(void)
 {
    int val, std;
    char *str; 
-   str = "--150c9";
+   str = "-150sdfg";
    val = ft_atoi(str); 
    std = atoi(str);
    printf("ft response : %d, atoi : %d\n", val, std);
 }
-/*
+
+
 int main () 
 {
    char str1[15];
