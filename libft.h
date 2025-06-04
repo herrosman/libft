@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:47:29 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/04 19:02:29 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/04 21:04:25 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 # include <string.h>
 # include <stdlib.h>
 
-extern const int INT_MAX;
+// Define SIZE_MAX if not available and without using stddef.h
+#ifndef SIZE_MAX
+#define SIZE_MAX ((unsigned long)-1)
+#endif
+
 
 int	ft_isalpha(int c);
 int	ft_isdigit(int c);
