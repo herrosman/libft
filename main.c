@@ -6,23 +6,27 @@
 /*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:57 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/05 17:16:29 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/05 19:43:08 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
+int main() {
 
-
-int	main(void)
-{
-	char *str1 = " XHello )9 ";
-	char *str2 = " ";
-	char *res = ft_strtrim(str1, str2);
-	
-	printf("res |%s|\n", res);
-	free (res);
+    FILE *fptr;
+    fptr = fopen("example.txt", "w");
+    
+    if (fptr == NULL) {
+        printf("Error!");
+        return 1;
+    }
+    
+    ft_putchar_fd('C', (int)fptr);
+    
+    fclose(fptr);
+    
+    return 0;
 }
 
 /*
