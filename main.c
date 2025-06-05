@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
+/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:57 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/04 21:06:38 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/05 17:16:29 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "libft.h"
 
+
+
+int	main(void)
+{
+	char *str1 = " XHello )9 ";
+	char *str2 = " ";
+	char *res = ft_strtrim(str1, str2);
+	
+	printf("res |%s|\n", res);
+	free (res);
+}
+
+/*
 void	test_ft_calloc(size_t nmemb, size_t size)
 {
     size_t	i;
@@ -84,7 +97,7 @@ int	main(void)
 
     return 0;
 }
-/*
+
 int main() {
    int n = 0;
    int *array;
