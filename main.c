@@ -3,19 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
+/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:57 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/05 22:05:04 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/06 16:08:50 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
+int	main(void)
+{
+	char *s = ft_itoa(-2147483648);
+	printf("response |%s| : length |%li|\n", s, ft_strlen(s));
+	free(s);
+	return (0);
+}
 
+/* ft_putnbr_fd
 int main(void)
 {
     // Test 1: Positive number to stdout
@@ -55,7 +60,7 @@ int main(void)
     printf("Test 6 (file): Check 'putnbr_test.txt' for 424242\n");
 
     return 0;
-}
+}*/
 /* * ft_putendl_fd - Write a string to a file descriptor followed by a newline
  * @s: The string to write
  * @fd: The file descriptor to write to
@@ -100,7 +105,7 @@ int main(void)
 {
    int val, std;
    char *str; 
-   str = "-150sdfg";
+   str = "-+150sdfg";
    val = ft_atoi(str); 
    std = atoi(str);
    printf("ft response : %d, atoi : %d\n", val, std);
