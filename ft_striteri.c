@@ -1,47 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 12:10:37 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/07 11:29:16 by aosman           ###   ########.fr       */
+/*   Created: 2025/06/08 19:40:32 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/08 19:47:56 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	char	*res;
-	int		len;
-	int		t;
-	int		s;
+	unsigned int	i;
 
-	s = (n < 0) ? -1 : 1;
-	len = (n <= 0) ? 1 : 0;
-	t = n;
-	while (t)
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		t /= 10;
-		len++;
+		f(i, &s[i]);
+		i++;
 	}
-	res = (char *)malloc(len + 1);
-	if (!res)
-		return (NULL);
-	res[len] = '\0';
-	if (n == 0)
-		res[0] = '0';
-	else
-	{
-		while (n)
-		{
-			res[--len] = '0' + s * (n % 10);
-			n /= 10;
-		}
-		if (s < 0)
-			res[0] = '-';
-	}
-	return (res);
 }

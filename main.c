@@ -3,23 +3,408 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:57 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/06 16:08:50 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/08 20:31:05 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main(void)
+/* * ft_atoi - Convert a string to an integer
+ * @str: The string to convert
+ *
+ * Returns the converted integer.
+ * If the string is NULL, returns 0.
+ * Handles leading/trailing whitespace, signs, and non-digit characters.
+ 
+#include <limits.h>
+
+void test_ft_atoi(const char *str)
 {
-	char *s = ft_itoa(-2147483648);
-	printf("response |%s| : length |%li|\n", s, ft_strlen(s));
-	free(s);
-	return (0);
+	//printf("Testing ft_atoi with input: \"%s\"\n", str ? str : "NULL");
+    int ft = ft_atoi(str);
+    int std = atoi(str);
+    int pass = (ft == std);
+    printf("ft_atoi(\"%s\") = %d | atoi = %d | %s\n",
+        str ? str : "NULL", ft, std, pass ? "PASS" : "FAIL");
 }
 
+int main(void)
+{
+    // Basic numbers
+    test_ft_atoi("0");
+    test_ft_atoi("42");
+    test_ft_atoi("-42");
+    test_ft_atoi("+42");
+    test_ft_atoi("2147483647"); // INT_MAX
+    test_ft_atoi("-2147483648"); // INT_MIN
+
+    // Leading/trailing spaces
+    test_ft_atoi("   123");
+    test_ft_atoi("\t\n\v\f\r 456");
+    test_ft_atoi("789   ");
+    test_ft_atoi("   -987   ");
+
+    // Leading zeros
+    test_ft_atoi("0000123");
+    test_ft_atoi("-0000123");
+
+    // Only sign
+    test_ft_atoi("+");
+    test_ft_atoi("-");
+
+    // Empty string
+    test_ft_atoi("");
+    test_ft_atoi("   ");
+
+    // Non-digit after number
+    test_ft_atoi("123abc");
+    test_ft_atoi("-42xyz");
+    test_ft_atoi("  +7seven");
+
+    // Multiple signs
+    test_ft_atoi("--42");
+    test_ft_atoi("++42");
+    test_ft_atoi("+-42");
+    test_ft_atoi("-+42");
+
+    // No digits
+    test_ft_atoi("abc");
+    test_ft_atoi("   abc");
+    test_ft_atoi("++--");
+
+    // Embedded nulls
+    test_ft_atoi("12\034");
+    test_ft_atoi("  56\0 78");
+
+    // Overflow/underflow
+    test_ft_atoi("2147483648");
+    test_ft_atoi("-2147483649");
+    test_ft_atoi("999999999999999999999");
+    test_ft_atoi("-999999999999999999999");
+
+    // Edge: NULL pointer (if your ft_atoi handles it)
+    // test_ft_atoi(NULL);
+
+    return 0;
+}
+*/
+/* ft_striteri - Apply a function to each character of a string with index
+ * @s: The string to iterate
+ * @f: The function to apply
+ *
+ * This function applies the function f to each character of the string s,
+ * passing the index of the character as the first argument and a pointer to
+ * the character as the second argument.
+ 
+void to_upper_even_i(unsigned int i, char *c) {
+    if (i % 2 == 0 && *c >= 'a' && *c <= 'z')
+        *c = *c - 32;
+}
+
+void add_index_i(unsigned int i, char *c) {
+    *c = *c + i;
+}
+
+void nullify_all(unsigned int i, char *c) {
+    (void)i;
+    *c = '\0';
+}
+
+void test_ft_striteri(char *input, void (*f)(unsigned int, char*), const char *expected, const char *desc) {
+    char buf[128];
+    if (input)
+        strncpy(buf, input, sizeof(buf));
+    else
+        buf[0] = '\0';
+    buf[sizeof(buf) - 1] = '\0';
+
+    ft_striteri(input ? buf : NULL, f);
+    int pass = (expected == NULL && (input == NULL || buf[0] == '\0')) ||
+               (expected && strcmp(buf, expected) == 0);
+    printf("ft_striteri(%s): \"%s\" | expected: \"%s\" | %s (%s)\n",
+           input ? input : "NULL", buf, expected ? expected : "NULL",
+           pass ? "PASS" : "FAIL", desc);
+}
+
+int main(void)
+{
+    test_ft_striteri("abcdef", to_upper_even_i, "AbCdEf", "Uppercase even indices");
+    test_ft_striteri("abc", add_index_i, "ace", "Add index to char");
+    test_ft_striteri("", to_upper_even_i, "", "Empty string");
+    test_ft_striteri(NULL, to_upper_even_i, NULL, "NULL input");
+    test_ft_striteri("xyz", NULL, "xyz", "NULL function pointer (should do nothing)");
+    test_ft_striteri("test", nullify_all, "", "Nullify all chars");
+    test_ft_striteri("A", to_upper_even_i, "A", "Single char");
+    test_ft_striteri("a", to_upper_even_i, "A", "Single lowercase char");
+    test_ft_striteri("123", add_index_i, "135", "Digits with index");
+    return 0;
+}
+*/
+/*  * ft_strmapi - Apply a function to each character of a string
+ * @s: The string to map
+ * @f: The function to apply
+ *
+ * Returns a newly allocated string with the results of applying f to each character of s.
+ * The caller is responsible for freeing the returned string.
+char to_upper_even(unsigned int i, char c) {
+    if (i % 2 == 0 && c >= 'a' && c <= 'z')
+        return c - 32;
+    return c;
+}
+
+char add_index(unsigned int i, char c) {
+    return c + i;
+}
+
+void test_ft_strmapi(const char *input, char (*f)(unsigned int, char), const char *expected, const char *desc) {
+    printf("Testing ft_strmapi with input: \"%s\", function: %p, expected: \"%s\"\n",
+           input ? input : "NULL", (void *)f, expected ? expected : "NULL");
+    char *result = ft_strmapi(input, f);
+    printf("Result: \"%s\"\n", result ? result : "NULL");
+    //int pass = (result && expected && strcmp(result, expected) == 0) ||
+               //(!result && !expected);
+    //(void)pass; // Avoid unused variable warning
+    (void)desc; // Avoid unused variable warning
+    free(result);
+}
+
+int main(void)
+{
+    printf("Testing ft_strmapi:\n");
+    test_ft_strmapi("abcdef", to_upper_even, "AbCdEf", "Uppercase even indices");
+    test_ft_strmapi("ABC", add_index, "ACE", "Add index to char");
+    test_ft_strmapi("", to_upper_even, "", "Empty string");
+    test_ft_strmapi(NULL, to_upper_even, NULL, "NULL input");
+    test_ft_strmapi("xyz", NULL, NULL, "NULL function pointer");
+    return 0;
+}
+*/
+/* * ft_split - Split a string into an array of strings based on a delimiter
+ * @s: The string to split
+ * @c: The delimiter character
+ *
+ * Returns an array of strings (NULL-terminated) or NULL if allocation fails.
+ 
+// Helper to free the result of ft_split
+void	free_split(char **arr)
+{
+    if (!arr)
+        return;
+    for (size_t i = 0; arr[i]; i++)
+        free(arr[i]);
+    free(arr);
+}
+
+// Helper to compare ft_split result with expected array
+void	test_ft_split(const char *s, char c, const char **expected)
+{
+    char	**res = ft_split(s, c);
+    int		pass = 1;
+    size_t	i = 0;
+
+    printf("ft_split(\"%s\", '%c'):\n", s ? s : "NULL", c);
+    if (!res && !expected)
+    {
+        printf("  PASS (both NULL)\n");
+        return;
+    }
+    if (!res || !expected)
+    {
+        printf("  FAIL (one NULL)\n");
+        free_split(res);
+        return;
+    }
+    while (res[i] && expected[i])
+    {
+        if (strcmp(res[i], expected[i]) != 0)
+            pass = 0;
+        printf("  [%zu]: \"%s\" | expected: \"%s\"%s\n", i, res[i], expected[i], (strcmp(res[i], expected[i]) == 0) ? " (OK)" : " (FAIL)");
+        i++;
+    }
+    if (res[i] || expected[i])
+    {
+        pass = 0;
+        printf("  Length mismatch: result %s, expected %s\n", res[i] ? "longer" : "shorter", expected[i] ? "longer" : "shorter");
+    }
+    printf("  %s\n", pass ? "PASS" : "FAIL");
+    free_split(res);
+}
+
+int main(void)
+{
+    // Basic split
+    const char *exp1[] = {"hello", "world", NULL};
+    test_ft_split("hello world", ' ', exp1);
+    
+    // Multiple delimiters
+    const char *exp2[] = {"a", "b", "c", NULL};
+    test_ft_split("a,,b,,,c", ',', exp2);
+
+    // Leading/trailing delimiters
+    const char *exp3[] = {"a", "b", "c", NULL};
+    test_ft_split(",a,b,c,", ',', exp3);
+
+    // Only delimiters
+    const char *exp4[] = {NULL};
+    test_ft_split(",,,", ',', exp4);
+
+    // Empty string
+    const char *exp5[] = {NULL};
+    test_ft_split("", ',', exp5);
+
+    // Delimiter not present
+    const char *exp6[] = {"abc", NULL};
+    test_ft_split("abc", ',', exp6);
+
+    // Delimiter is '\0'
+    const char *exp7[] = {"abc", NULL};
+    test_ft_split("abc", '\0', exp7);
+
+    // String with only one word
+    const char *exp8[] = {"word", NULL};
+    test_ft_split("word", ' ', exp8);
+
+    // String with empty substrings between delimiters
+    const char *exp9[] = {"a", "b", NULL};
+    test_ft_split("a,,b", ',', exp9);
+
+    // NULL input
+    test_ft_split(NULL, ',', NULL);
+
+    // Long input, special chars
+    const char *exp10[] = {"foo", "bar", "baz", NULL};
+    test_ft_split("foo\tbar\tbaz", '\t', exp10);
+    
+    return 0;
+}
+*/
+/* * ft_strtrim - Trim characters from the start and end of a string
+ * @s1: The string to trim
+ * @set: The set of characters to trim
+ *
+ * Returns a newly allocated string with the characters in set removed from both ends.
+ * The caller is responsible for freeing the returned string.
+
+void test_ft_strtrim(const char *s1, const char *set, const char *expected)
+{
+    char *res = ft_strtrim(s1, set);
+    int pass = (res && expected && strcmp(res, expected) == 0) ||
+               (!res && !expected);
+    printf("ft_strtrim(\"%s\", \"%s\") = \"%s\" | expected: \"%s\" | %s\n",
+           s1 ? s1 : "NULL", set ? set : "NULL", res ? res : "NULL", expected ? expected : "NULL", pass ? "PASS" : "FAIL");
+    free(res);
+}
+
+int main(void)
+{
+    // Basic trims
+    test_ft_strtrim("  hello  ", " ", "hello");
+    test_ft_strtrim("xxhelloxx", "x", "hello");
+    test_ft_strtrim("abcXYZabc", "abc", "XYZ");
+    test_ft_strtrim("42hello42", "42", "hello");
+
+    // No trim needed
+    test_ft_strtrim("hello", " ", "hello");
+    test_ft_strtrim("hello", "x", "hello");
+
+    // All trimmed
+    test_ft_strtrim("xxxx", "x", "");
+    test_ft_strtrim("   ", " ", "");
+
+    // Empty string
+    test_ft_strtrim("", " ", "");
+    test_ft_strtrim("", "", "");
+
+    // Empty set
+    test_ft_strtrim("hello", "", "hello");
+
+    // Set with multiple chars
+    test_ft_strtrim("abchelloabc", "abc", "hello");
+    test_ft_strtrim("cabac", "abc", "");
+
+    // Only leading or trailing
+    test_ft_strtrim("  hello", " ", "hello");
+    test_ft_strtrim("hello  ", " ", "hello");
+
+    // Set with special chars
+    test_ft_strtrim("\n\t hello \t\n", " \n\t", "hello");
+
+    // Edge: NULL input
+    test_ft_strtrim(NULL, " ", NULL);
+    test_ft_strtrim("hello", NULL, NULL);
+
+    // Edge: set contains all possible chars
+    char all_ascii[128];
+    for (int i = 0; i < 127; i++) all_ascii[i] = (char)i;
+    all_ascii[127] = '\0';
+    test_ft_strtrim("hello", all_ascii, "");
+
+    // Edge: string with only set chars
+    test_ft_strtrim("aaa", "a", "");
+
+    // Edge: string with set chars in the middle
+    test_ft_strtrim("ahelloa", "a", "hello");
+    test_ft_strtrim("abhelloab", "ab", "hello");
+
+    return 0;
+}
+*/
+/* ft_itoa - Convert an integer to a string
+ * @n: The integer to convert
+ *
+ * Returns a pointer to the newly allocated string representing the integer.
+ * The caller is responsible for freeing the returned string.
+void test_ft_itoa(int n, const char *expected)
+{
+    char *res = ft_itoa(n);
+    if (!res)
+    {
+        printf("ft_itoa(%d): NULL (allocation failed)\n", n);
+        return;
+    }
+    size_t len = strlen(res);
+    int pass = (strcmp(res, expected) == 0);
+    printf("ft_itoa(%d) = \"%s\" (len=%zu) | expected: \"%s\" | %s\n",
+           n, res, len, expected, pass ? "PASS" : "FAIL");
+    free(res);
+}
+
+int main(void)
+{
+    // Edge cases
+    test_ft_itoa(0, "0");
+    test_ft_itoa(1, "1");
+    test_ft_itoa(-1, "-1");
+    test_ft_itoa(2147483647, "2147483647");      // INT_MAX
+    test_ft_itoa(-2147483648, "-2147483648");    // INT_MIN
+
+    // Typical numbers
+    test_ft_itoa(42, "42");
+    test_ft_itoa(-42, "-42");
+    test_ft_itoa(100000, "100000");
+    test_ft_itoa(-100000, "-100000");
+
+    // Numbers with trailing zeros
+    test_ft_itoa(1000, "1000");
+    test_ft_itoa(-1000, "-1000");
+
+    // Large negative, not INT_MIN
+    test_ft_itoa(-2147483647, "-2147483647");
+
+    // Single digit
+    for (int i = -9; i <= 9; i++)
+        test_ft_itoa(i, (i < 0) ? (char[3]){'-', (char)('0' - i), '\0'} : (char[2]){(char)('0' + i), '\0'});
+
+    // Random values
+    test_ft_itoa(123456789, "123456789");
+    test_ft_itoa(-987654321, "-987654321");
+
+    return 0;
+}
+*/
 /* ft_putnbr_fd
 int main(void)
 {
@@ -92,23 +477,6 @@ int main(void)
     printf("Test 3 (file): Check 'putchar_test.txt' for 'C'\n");
 
     return 0;
-}
-*/
-/* ft_atoi - Convert a string to an integer
- * @nptr: The string to convert
- *
- * Returns the converted integer value.
- 
-#include "libft.h"
-
-int main(void)
-{
-   int val, std;
-   char *str; 
-   str = "-+150sdfg";
-   val = ft_atoi(str); 
-   std = atoi(str);
-   printf("ft response : %d, atoi : %d\n", val, std);
 }
 */
 /* ft_memcmp - Compare two memory blocks

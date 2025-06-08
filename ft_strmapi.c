@@ -1,47 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 12:10:37 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/07 11:29:16 by aosman           ###   ########.fr       */
+/*   Created: 2025/06/07 21:25:01 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/08 19:52:06 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
+	size_t	i;
+	size_t	len;
 	char	*res;
-	int		len;
-	int		t;
-	int		s;
 
-	s = (n < 0) ? -1 : 1;
-	len = (n <= 0) ? 1 : 0;
-	t = n;
-	while (t)
-	{
-		t /= 10;
+	if (!s || !f)
+		return (NULL);
+	len = 0;
+	while (s[len])
 		len++;
-	}
-	res = (char *)malloc(len + 1);
+	res = (char *)malloc((len + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
-	res[len] = '\0';
-	if (n == 0)
-		res[0] = '0';
-	else
+	i = 0;
+	while (i < len)
 	{
-		while (n)
-		{
-			res[--len] = '0' + s * (n % 10);
-			n /= 10;
-		}
-		if (s < 0)
-			res[0] = '-';
+		res[i] = f(i, s[i]);
+		i++;
 	}
+	res[i] = '\0';
 	return (res);
 }
