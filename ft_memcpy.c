@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosman <aosman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:01:02 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/04 13:08:44 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/09 13:08:58 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t		i;
-	char		*dest_ptr;
-	const char	*src_ptr;
+	char		*d_ptr;
+	const char	*s_ptr;
 
 	if (!dest && !src)
 		return (NULL);
-	dest_ptr = (char *)dest;
-	src_ptr = (const char *)src;
+	d_ptr = (char *)dest;
+	s_ptr = (const char *)src;
 	i = 0;
 	while (i < n)
 	{
-		dest_ptr[i] = src_ptr[i];
+		d_ptr[i] = s_ptr[i];
 		i++;
 	}
 	return (dest);

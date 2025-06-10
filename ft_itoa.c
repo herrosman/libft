@@ -6,27 +6,37 @@
 /*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 12:10:37 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/07 11:29:16 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/08 21:27:18 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	get_length(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
 char	*ft_itoa(int n)
 {
 	char	*res;
 	int		len;
-	int		t;
 	int		s;
 
-	s = (n < 0) ? -1 : 1;
-	len = (n <= 0) ? 1 : 0;
-	t = n;
-	while (t)
-	{
-		t /= 10;
-		len++;
-	}
+	s = 1;
+	if (n < 0)
+		s = -1;
+	len = get_length(n);
 	res = (char *)malloc(len + 1);
 	if (!res)
 		return (NULL);
@@ -37,7 +47,7 @@ char	*ft_itoa(int n)
 	{
 		while (n)
 		{
-			res[--len] = '0' + s * (n % 10);
+			res[--len] = s * (n % 10) + '0';
 			n /= 10;
 		}
 		if (s < 0)

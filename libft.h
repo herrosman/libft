@@ -6,7 +6,7 @@
 /*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:47:29 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/08 20:15:36 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/09 22:19:40 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define LIBFT_H
 
 # include <stdio.h>
-# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
 
 // Define SIZE_MAX if not available and without using stddef.h
 #ifndef SIZE_MAX
@@ -45,7 +45,7 @@ char	*ft_strchr(const char *str, int search_str);
 char	*ft_strrchr(const char *str, int search_str);
 char	*ft_strcpy(char *dest, const char *src);
 size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size); 
+size_t	ft_strlcpy(char *dest, const char *src, size_t n); 
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

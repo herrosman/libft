@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/09 19:06:36 by aosman            #+#    #+#             */
+/*   Updated: 2025/06/09 19:34:10 by aosman           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static size_t	count_words(const char *s, char c)
 {
 	size_t	count;
 	size_t	i;
-	
-	count= 0;
+
+	count = 0;
 	i = 0;
 	if (!s)
 		return (0);
@@ -23,22 +35,14 @@ static size_t	count_words(const char *s, char c)
 	return (count);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**split_helper(char **res, const char *s, char c)
 {
-	char	**res;
 	size_t	i;
-	size_t	k;
-	size_t	words;
+	size_t	j;
 	size_t	start;
-	
-	i= 0;
-	k = 0;
-	if (!s)
-		return (NULL);
-	words = count_words(s, c);
-	res = (char **)malloc((words + 1) * sizeof(char *));
-	if (!res)
-		return (NULL);
+
+	i = 0;
+	j = 0;
 	while (s[i])
 	{
 		while (s[i] == c)
@@ -48,10 +52,21 @@ char	**ft_split(char const *s, char c)
 			start = i;
 			while (s[i] && s[i] != c)
 				i++;
-			printf("end: %zu\n", i);
-			res[k++] = ft_substr(s, start, i - start);
+			res[j++] = ft_substr(s, start, i - start);
 		}
 	}
-	res[k] = NULL;
+	res[j] = NULL;
 	return (res);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**res;
+
+	if (!s)
+		return (NULL);
+	res = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!res)
+		return (NULL);
+	return (split_helper(res, s, c));
 }

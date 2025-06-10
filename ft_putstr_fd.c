@@ -6,13 +6,13 @@
 /*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 21:23:20 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/05 21:26:00 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/09 19:04:28 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
 }
