@@ -6,7 +6,7 @@
 /*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:47:29 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/09 22:19:40 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/10 20:49:08 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # include <unistd.h>
 # include <string.h>
 
-// Define SIZE_MAX if not available and without using stddef.h
-#ifndef SIZE_MAX
-#define SIZE_MAX ((unsigned long)-1)
-#endif
+typedef struct s_list
+{
+	void *content;
+	struct s_list *next;
+}	t_list;
 
 
 int		ft_atoi(const char *ptr);
@@ -34,7 +35,15 @@ int	ft_isprint(int c);
 int	ft_toupper(int c);
 int	ft_tolower(int c);
 
-
+t_list	*ft_lstnew(void *content);
+void	ft_lstclear(t_list **lst, void (*del)(void*));
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
 
 size_t	ft_strlen(const char *str);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
@@ -43,7 +52,6 @@ char	*ft_strncat(char *dest, const char *src, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size); 
 char	*ft_strchr(const char *str, int search_str);
 char	*ft_strrchr(const char *str, int search_str);
-char	*ft_strcpy(char *dest, const char *src);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n); 
 size_t	ft_strlcat(char *dest, const char *src, size_t size);

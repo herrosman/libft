@@ -6,12 +6,32 @@
 /*   By: aosman <aosman@42wolfsburg.de>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:57 by aosman            #+#    #+#             */
-/*   Updated: 2025/06/09 22:23:20 by aosman           ###   ########.fr       */
+/*   Updated: 2025/06/10 20:56:24 by aosman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/**/
+
+
+void	putstr_stdout(void *content)
+{
+	ft_putstr_fd((char *)content, 1);
+}
+
+int main(void)
+{
+	// Example usage of ft_lstiter
+	 // Allocate content dynamically
+    t_list *list = ft_lstnew(ft_strdup("Hello"));
+    ft_lstadd_back(&list, ft_lstnew(ft_strdup("World")));
+    ft_lstadd_back(&list, ft_lstnew(ft_strdup("42")));
+	ft_lstiter(list, &putstr_stdout);
+
+	// Free the list after use
+	ft_lstclear(&list, &free);
+	return (0);
+}
+/*
 static char *my_strnstr(const char *haystack, const char *needle, size_t len) {
     size_t i, j;
     if (!*needle)
@@ -69,7 +89,7 @@ void test_ft_strnstr() {
 int main(void) {
     test_ft_strnstr();
     return 0;
-}
+}*/
 /* * ft_strncmp - Compare two strings up to n characters
  * @s1: First string
  * @s2: Second string
